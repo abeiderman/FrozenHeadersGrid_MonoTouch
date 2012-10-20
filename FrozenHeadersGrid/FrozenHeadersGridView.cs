@@ -53,19 +53,18 @@ namespace FrozenHeadersGrid
 				UpdateContent();
 			}
 		}
+
+        public UIColor TintColor
+        {
+            set
+            {
+                gridHeaderRowView.TintColor = value;
+                gridHeaderRowView.Gridlines.Color = value;
+                gridHeaderColumnView.TintColor = value;
+                gridHeaderColumnView.Gridlines.Color = value;
+            }
+        }
         
-		public UIColor HeaderRowTintColor
-		{
-			get { return gridHeaderRowView.TintColor; }
-			set { gridHeaderRowView.TintColor = value; }
-		}
-
-		public UIColor HeaderColumnTintColor
-		{
-			get { return gridHeaderColumnView.TintColor; }
-			set { gridHeaderColumnView.TintColor = value; }
-		}
-
 		public GridContentView ContentView { get { return gridContentView; } }
 
 		public GridHeaderView HeaderRowView { get { return gridHeaderRowView; } }
@@ -131,8 +130,8 @@ namespace FrozenHeadersGrid
 		public virtual void UpdateContent()
 		{
 			Clear();
-			columnCount = @delegate.GetColumnCount(this);
-			rowCount = @delegate.GetRowCount(this);
+			columnCount = @delegate.NumberOfColumns(this);
+			rowCount = @delegate.NumberOfRows(this);
 
 			UpdateHeaderRow();
 			UpdateHeaderColumn();
@@ -159,7 +158,7 @@ namespace FrozenHeadersGrid
 		void AddHeaderRowItemView(int columnIndex)
 		{
 			var item = new GridHeaderItemView();
-			item.TextLabel.Text = @delegate.GetTitleForHeaderRowItem(this, columnIndex);
+			item.TextLabel.Text = @delegate.TitleForColumn(this, columnIndex);
 			item.TextLabel.TextAlignment = UITextAlignment.Center;
 			item.TextLabel.TextColor = UIColor.White;
 			gridHeaderRowView[columnIndex] = item;
@@ -176,7 +175,7 @@ namespace FrozenHeadersGrid
 		void AddHeaderColumnItemView(int rowIndex)
 		{
 			var item = new GridHeaderItemView();
-			item.TextLabel.Text = @delegate.GetTitleForHeaderColumnItem(this, rowIndex);
+			item.TextLabel.Text = @delegate.TitleForRow(this, rowIndex);
 			item.TextLabel.TextAlignment = UITextAlignment.Left;
 			item.TextLabel.TextColor = UIColor.White;
 			gridHeaderColumnView[rowIndex] = item;
@@ -193,20 +192,7 @@ namespace FrozenHeadersGrid
 		void UpdateContentViewRow(int rowIndex)
 		{
 			for (int columnIndex = 0; columnIndex < columnCount; columnIndex++)
-				ContentView[new Point(columnIndex, rowIndex)] = @delegate.GetViewForGrid(this, columnIndex, rowIndex);
+				ContentView[new Point(columnIndex, rowIndex)] = @delegate.ViewForCell(this, new Point(columnIndex, rowIndex));
 		}
-	}
-
-	public interface IFrozenHeadersGridViewDelegate
-	{
-		int GetColumnCount(FrozenHeadersGridView gridView);
-
-		int GetRowCount(FrozenHeadersGridView gridView);
-
-		string GetTitleForHeaderRowItem(FrozenHeadersGridView gridView, int column);
-
-		string GetTitleForHeaderColumnItem(FrozenHeadersGridView gridView, int row);
-
-		UIView GetViewForGrid(FrozenHeadersGridView gridView, int column, int row);
 	}
 }

@@ -51,5 +51,7 @@
     <Compile Include="GridHeaderView.cs" />
     <Compile Include="GridHeaderItemView.cs" />
     <Compile Include="IndexedView.cs" />
+    <Compile Include="IFrozenHeadersGridViewDelegate.cs" />
+    <Compile Include="FrozenHeadersGridViewDelegate.cs" />
   </ItemGroup>
 </Project>

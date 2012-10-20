@@ -46,13 +46,55 @@ namespace FrozenHeadersGrid.UnitTests
 			Assert.True(updateCalled);
 		}
 
+        #region TintColor
+        [Test]
+        public void TintColor_SetsHeaderRowTintColor()
+        {
+            var gridView = CreateFrozenHeadersGridView();
+
+            gridView.TintColor = UIColor.Blue;
+
+            Assert.AreEqual(UIColor.Blue, gridView.HeaderRowView.TintColor);
+        }
+
+        [Test]
+        public void TintColor_SetsHeaderRowGridlinesColor()
+        {
+            var gridView = CreateFrozenHeadersGridView();
+            
+            gridView.TintColor = UIColor.Blue;
+            
+            Assert.AreEqual(UIColor.Blue, gridView.HeaderRowView.Gridlines.Color);
+        }
+
+        [Test]
+        public void TintColor_SetsHeaderColumnTintColor()
+        {
+            var gridView = CreateFrozenHeadersGridView();
+            
+            gridView.TintColor = UIColor.Blue;
+            
+            Assert.AreEqual(UIColor.Blue, gridView.HeaderColumnView.TintColor);
+        }
+        
+        [Test]
+        public void TintColor_SetsHeaderColumnGridlinesColor()
+        {
+            var gridView = CreateFrozenHeadersGridView();
+            
+            gridView.TintColor = UIColor.Blue;
+            
+            Assert.AreEqual(UIColor.Blue, gridView.HeaderColumnView.Gridlines.Color);
+        }
+        #endregion
+
 		[Test]
 		public void UpdateContent_WhenDelegateReturnsItemView_AddsTheViewToTheGridContentView()
 		{
 			var gridView = CreateFrozenHeadersGridView();
 			var itemView = new UIView();
 			var mockDelegate = new FrozenHeadersGridViewDelegateMock { ColumnCount = 1, RowCount = 1};
-			mockDelegate.ViewForGridDelegate = (view, column, row) => {
+			mockDelegate.ViewForCellDelegate = (view, cell) => {
 				return itemView; };
 
 			gridView.Delegate = mockDelegate;
@@ -76,7 +118,7 @@ namespace FrozenHeadersGrid.UnitTests
 			string[] titles = {"First title", "Second title"};
 			var gridView = CreateFrozenHeadersGridViewWithDelegate(columns: 2);
             ((FrozenHeadersGridViewDelegateMock)gridView.Delegate)
-                .TitleForHeaderRowItemDelegate = (grid, column) => { return titles[column]; };
+                .TitleForColumnDelegate = (grid, column) => { return titles[column]; };
 
 			gridView.UpdateContent();
             
@@ -100,7 +142,7 @@ namespace FrozenHeadersGrid.UnitTests
 			string[] titles = {"First title", "Second title"};
 			var gridView = CreateFrozenHeadersGridViewWithDelegate(rows: 2);
             ((FrozenHeadersGridViewDelegateMock)gridView.Delegate)
-                .TitleForHeaderColumnItemDelegate = (grid, row) => { return titles[row]; };
+                .TitleForRowDelegate = (grid, row) => { return titles[row]; };
 			
 			gridView.UpdateContent();
 			

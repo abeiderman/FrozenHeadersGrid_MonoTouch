@@ -1,52 +1,53 @@
 using System;
+using System.Drawing;
 using MonoTouch.UIKit;
 
 namespace FrozenHeadersGrid.UnitTests.Mocks
 {
-	internal class FrozenHeadersGridViewDelegateMock : IFrozenHeadersGridViewDelegate
+	internal class FrozenHeadersGridViewDelegateMock : FrozenHeadersGridViewDelegate
 	{
 		public int ColumnCount { get; set; }
 		
 		public int RowCount { get; set; }
 		
-		public Func<FrozenHeadersGridView, int, int, UIView> ViewForGridDelegate { get; set; }
+		public Func<FrozenHeadersGridView, Point, UIView> ViewForCellDelegate { get; set; }
 		
-		public Func<FrozenHeadersGridView, int, string> TitleForHeaderRowItemDelegate { get; set; }
+		public Func<FrozenHeadersGridView, int, string> TitleForColumnDelegate { get; set; }
 		
-		public Func<FrozenHeadersGridView, int, string> TitleForHeaderColumnItemDelegate { get; set; }
+		public Func<FrozenHeadersGridView, int, string> TitleForRowDelegate { get; set; }
 		
-		public int GetColumnCount(FrozenHeadersGridView gridView)
+		public override int NumberOfColumns(FrozenHeadersGridView gridView)
 		{
 			return ColumnCount;
 		}
 		
-		public int GetRowCount(FrozenHeadersGridView gridView)
+		public override int NumberOfRows(FrozenHeadersGridView gridView)
 		{
 			return RowCount;
 		}
 		
-		public string GetTitleForHeaderRowItem(FrozenHeadersGridView gridView, int column)
+		public override string TitleForColumn(FrozenHeadersGridView gridView, int column)
 		{
-			if (TitleForHeaderRowItemDelegate == null)
+			if (TitleForColumnDelegate == null)
 				return "";
 			else
-				return TitleForHeaderRowItemDelegate(gridView, column);
+				return TitleForColumnDelegate(gridView, column);
 		}
 		
-		public string GetTitleForHeaderColumnItem(FrozenHeadersGridView gridView, int row)
+		public override string TitleForRow(FrozenHeadersGridView gridView, int row)
 		{
-			if (TitleForHeaderColumnItemDelegate == null)
+			if (TitleForRowDelegate == null)
 				return "";
 			else
-				return TitleForHeaderColumnItemDelegate(gridView, row);
+				return TitleForRowDelegate(gridView, row);
 		}
 		
-		public UIView GetViewForGrid(FrozenHeadersGridView gridView, int column, int row)
+		public override UIView ViewForCell(FrozenHeadersGridView gridView, Point cell)
 		{
-			if (ViewForGridDelegate == null)
+			if (ViewForCellDelegate == null)
 				return null;
 			else
-				return ViewForGridDelegate(gridView, column, row);
+				return ViewForCellDelegate(gridView, cell);
 		}
 	}
 }

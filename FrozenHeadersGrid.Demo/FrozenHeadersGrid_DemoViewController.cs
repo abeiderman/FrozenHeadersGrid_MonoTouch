@@ -32,10 +32,7 @@ namespace FrozenHeadersGrid.Demo
             gridView.Delegate = this;
 			gridView.ContentView.HorizontalGridlines.Color = UIColor.LightGray;
 			gridView.ContentView.VerticalGridlines.Color = UIColor.LightGray;
-            gridView.HeaderRowView.Gridlines.Color = TintColor;
-            gridView.HeaderColumnView.Gridlines.Color = TintColor;
-            gridView.HeaderRowTintColor = TintColor;
-            gridView.HeaderColumnTintColor = TintColor;
+            gridView.TintColor = TintColor;
 
 			cornerView.AutoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth;
 			gridView.HeaderCornerView.AddSubview(cornerView);
@@ -62,34 +59,34 @@ namespace FrozenHeadersGrid.Demo
 		}
 
 		#region FrozenHeadersGridViewDelegate implementation
-		public int GetColumnCount (FrozenHeadersGridView gridView)
+		public int NumberOfColumns(FrozenHeadersGridView gridView)
 		{
 			return ColumnTitles.Length;
 		}
 
-		public int GetRowCount (FrozenHeadersGridView gridView)
+		public int NumberOfRows(FrozenHeadersGridView gridView)
 		{
 			return 25;
 		}
 
-		public string GetTitleForHeaderRowItem (FrozenHeadersGridView gridView, int column)
+		public string TitleForColumn(FrozenHeadersGridView gridView, int column)
 		{
             return string.Format("Column {0}", ColumnTitles[column]);
 		}
 
-		public string GetTitleForHeaderColumnItem (FrozenHeadersGridView gridView, int row)
+		public string TitleForRow(FrozenHeadersGridView gridView, int row)
 		{
 			return string.Format("Row {0}", row + 1);
 		}
 
-		public UIView GetViewForGrid (FrozenHeadersGridView gridView, int column, int row)
+		public UIView ViewForCell(FrozenHeadersGridView gridView, Point cell)
 		{
 			var view = new GridItemView();
 			view.BackgroundColor = UIColor.White;
 			var label = new UILabel(view.Bounds);
 			label.AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
 			label.TextAlignment = UITextAlignment.Center;
-			label.Text = String.Format("Cell {0}{1}", ColumnTitles[column], row + 1);
+			label.Text = String.Format("Cell {0}{1}", ColumnTitles[cell.X], cell.Y + 1);
             label.TextColor = UIColor.DarkTextColor;
 			view.AddSubview(label);
 			return view;
