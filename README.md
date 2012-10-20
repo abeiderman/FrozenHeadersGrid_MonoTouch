@@ -12,7 +12,7 @@ How to Use FrozenHeadersGrid
 
 		var gridView = new FrozenHeadersGridView(View.Bounds);
 
-2. Either implement the IFrozenHeadersGridViewDelegate interface or extend FrozenHeadersGridViewDelegate class:
+2. Either implement the IFrozenHeadersGridViewDelegate interface or extend the FrozenHeadersGridViewDelegate class:
 
 		class GridDelegate : FrozenHeadersGridViewDelegate
 		{
