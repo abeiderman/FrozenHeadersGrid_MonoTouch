@@ -98,6 +98,7 @@
       <DependentUpon>FrozenHeadersGrid_DemoViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="FrozenHeadersGrid_DemoViewController.cs" />
+    <Compile Include="CornerView.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="FrozenHeadersGrid_DemoViewController_iPad.xib" />

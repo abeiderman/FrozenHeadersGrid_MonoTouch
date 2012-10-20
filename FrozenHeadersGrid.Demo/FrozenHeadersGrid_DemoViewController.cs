@@ -33,7 +33,7 @@ namespace FrozenHeadersGrid.Demo
             gridView.ContentView.VerticalGridlines.Color = UIColor.LightGray;
             gridView.TintColor = GridTintColor;
 
-            var cornerView = new CornerView();
+            var cornerView = new CornerView(GridTintColor);
             cornerView.AutoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth;
             gridView.HeaderCornerView.AddSubview(cornerView);
 
@@ -91,28 +91,6 @@ namespace FrozenHeadersGrid.Demo
             return view;
         }
         #endregion
-
-        class CornerView : UIView
-        {
-            public override void Draw(RectangleF rect)
-            {
-                CGContext context = UIGraphics.GetCurrentContext();
-                context.DrawLinearGradient(new CGGradient(CGColorSpace.CreateDeviceRGB(), 
-                                                      new CGColor[] { GridTintColor.CGColor,
-                                                        GridTintColor.Darken(0.35f).CGColor }), 
-                                       new PointF(0.5f, rect.Top),
-                                       new PointF(0.5f, rect.Bottom), 0);
-
-                context.SetStrokeColor(GridTintColor.CGColor);
-                context.SetLineDash(0, new float[0], 0);
-                context.SetLineWidth(1);
-                context.MoveTo(rect.Left, rect.Bottom - 0.5f);
-                context.AddLineToPoint(rect.Right, rect.Bottom - 0.5f);
-                context.MoveTo(rect.Right - 0.5f, rect.Top);
-                context.AddLineToPoint(rect.Right - 0.5f, rect.Bottom);
-                context.StrokePath();
-            }
-        }
     }
 }
 
