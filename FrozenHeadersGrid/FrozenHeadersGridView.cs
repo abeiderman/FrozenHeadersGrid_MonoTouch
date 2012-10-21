@@ -157,10 +157,9 @@ namespace FrozenHeadersGrid
 
 		void AddHeaderRowItemView(int columnIndex)
 		{
-			var item = new GridHeaderItemView();
-			item.TextLabel.Text = @delegate.TitleForColumn(this, columnIndex);
-			item.TextLabel.TextAlignment = UITextAlignment.Center;
-			item.TextLabel.TextColor = UIColor.White;
+			var item = CreateHeaderLabel();
+			item.Text = @delegate.TitleForColumn(this, columnIndex);
+			item.TextAlignment = UITextAlignment.Center;
 			gridHeaderRowView[columnIndex] = item;
 		}
 
@@ -174,11 +173,16 @@ namespace FrozenHeadersGrid
 
 		void AddHeaderColumnItemView(int rowIndex)
 		{
-			var item = new GridHeaderItemView();
-			item.TextLabel.Text = @delegate.TitleForRow(this, rowIndex);
-			item.TextLabel.TextAlignment = UITextAlignment.Left;
-			item.TextLabel.TextColor = UIColor.White;
+			var item = CreateHeaderLabel();
+			item.Text = @delegate.TitleForRow(this, rowIndex);
+			item.TextAlignment = UITextAlignment.Left;
 			gridHeaderColumnView[rowIndex] = item;
+		}
+
+		UILabel CreateHeaderLabel()
+		{
+			return new UILabel { BackgroundColor = UIColor.Clear, 
+				TextColor = UIColor.White };
 		}
 
 		void UpdateContentViews()

@@ -122,8 +122,8 @@ namespace FrozenHeadersGrid.UnitTests
 
 			gridView.UpdateContent();
             
-			Assert.AreEqual("First title", ((GridHeaderItemView)gridView.HeaderRowView[0]).TextLabel.Text);
-			Assert.AreEqual("Second title", ((GridHeaderItemView)gridView.HeaderRowView[1]).TextLabel.Text);
+			Assert.AreEqual("First title", ((UILabel)gridView.HeaderRowView[0]).Text);
+			Assert.AreEqual("Second title", ((UILabel)gridView.HeaderRowView[1]).Text);
 		}
 
 		[Test]
@@ -146,8 +146,8 @@ namespace FrozenHeadersGrid.UnitTests
 			
 			gridView.UpdateContent();
 			
-			Assert.AreEqual("First title", ((GridHeaderItemView)gridView.HeaderColumnView[0]).TextLabel.Text);
-			Assert.AreEqual("Second title", ((GridHeaderItemView)gridView.HeaderColumnView[1]).TextLabel.Text);
+			Assert.AreEqual("First title", ((UILabel)gridView.HeaderColumnView[0]).Text);
+			Assert.AreEqual("Second title", ((UILabel)gridView.HeaderColumnView[1]).Text);
 		}
 
 		FrozenHeadersGridView CreateFrozenHeadersGridView(float width = 100, float height = 100)

@@ -49,7 +49,6 @@
     <Compile Include="GridHeaderColumnView.cs" />
     <Compile Include="GridlineStyle.cs" />
     <Compile Include="GridHeaderView.cs" />
-    <Compile Include="GridHeaderItemView.cs" />
     <Compile Include="IndexedView.cs" />
     <Compile Include="IFrozenHeadersGridViewDelegate.cs" />
     <Compile Include="FrozenHeadersGridViewDelegate.cs" />

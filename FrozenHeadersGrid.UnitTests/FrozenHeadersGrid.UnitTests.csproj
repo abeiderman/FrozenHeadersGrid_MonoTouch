@@ -107,7 +107,6 @@
     <Compile Include="GridHeaderRowViewTest.cs" />
     <Compile Include="GridHeaderColumnViewTest.cs" />
     <Compile Include="GridlineStyleTest.cs" />
-    <Compile Include="GridHeaderItemViewTest.cs" />
     <Compile Include="GridHeaderViewTest.cs" />
     <Compile Include="IndexedViewTest.cs" />
     <Compile Include="FrozenHeadersGridViewTest.LayoutSubviews.cs" />
