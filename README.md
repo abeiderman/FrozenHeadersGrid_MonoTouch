@@ -8,13 +8,13 @@ FrozenHeadersGrid is a bare-bones grid view that allows scrolling the contents o
 How to Use FrozenHeadersGrid
 ----------------------------
 
-1. Instantiate the grid view with a rectangle.  For instance, in your view controller's ViewDidLoad method:
+Instantiate the grid view with a rectangle.  For instance, in your view controller's ViewDidLoad method:
 
 ```csharp
 var gridView = new FrozenHeadersGridView(View.Bounds);
 ```
 
-2. Either implement the IFrozenHeadersGridViewDelegate interface or extend the FrozenHeadersGridViewDelegate class:
+Either implement the IFrozenHeadersGridViewDelegate interface or extend the FrozenHeadersGridViewDelegate class:
 
 ```csharp
 class GridDelegate : FrozenHeadersGridViewDelegate
@@ -52,7 +52,7 @@ class GridDelegate : FrozenHeadersGridViewDelegate
 }
 ```
         
-3. Set the Delegate property of your grid view to an instance of the delegate you implemented:
+Set the Delegate property of your grid view to an instance of the delegate you implemented:
 
 ```csharp
 var gridView = new FrozenHeadersGridView(View.Bounds);
